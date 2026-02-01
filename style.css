@@ -1,0 +1,266 @@
+/* --- 1. CONFIGURAÇÕES GERAIS (ATMOSFERA SOMBRIA) --- */
+body {
+    background-color: #0a0a0c; /* Preto quase absoluto */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Crimson Text', serif; /* Fonte clássica de mistério */
+    color: #d1d1d1;
+}
+
+/* Efeito de fumaça/nevoeiro no fundo */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(60, 0, 0, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(20, 20, 30, 0.5) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* --- 2. BANNER RESPONSIVO (ESTILO NOIR) --- */
+.admin-banner {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 50px 40px;
+    /* Gradiente escuro e dramático */
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    border-radius: 4px; /* Bordas retas são mais sérias que redondas */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333; /* Borda fina e discreta */
+    box-sizing: border-box;
+}
+
+.admin-banner::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 3px);
+    pointer-events: none;
+}
+
+.admin-content h1 {
+    flex: 1;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -1px;
+    margin: 0;
+    color: #e2e2e2;
+    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+}
+
+.admin-description {
+    flex: 1;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+    color: #888;
+    font-style: italic;
+}
+
+/* --- 3. CARROSSEL (GALERIA DE EVIDÊNCIAS) --- */
+.imgg img {
+    flex: 0 0 240px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 2px !important;
+    filter: grayscale(80%) contrast(120%); /* Estilo foto antiga/investigação */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7); 
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 1px solid #444;
+}
+
+.imgg img:hover { 
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.03);
+    border-color: #991b1b; /* Vermelho sangue seco */
+    box-shadow: 0 0 30px rgba(153, 27, 27, 0.4);
+}
+
+/* --- 4. SETAS (MISTERIOSAS) --- */
+.seta-decorativa {
+    color: #444;
+    font-weight: 100;
+    text-shadow: none;
+}
+
+/* --- 5. SEÇÃO DE COMPRA (O DESFECHO) --- */
+.compra-infantil {
+    background: #050505;
+    border-top: 1px solid #1a1a1a;
+}
+
+.compra-infantil h1 {
+    color: #991b1b; /* Vermelho profundo */
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.btn-infantil {
+    background: transparent;
+    color: #e2e2e2 !important;
+    border: 1px solid #991b1b;
+    border-radius: 0px; /* Quadrado para passar seriedade */
+    box-shadow: none;
+    text-shadow: none;
+    animation: flicker 4s infinite; /* Efeito de luz falhando */
+    transition: all 0.4s;
+}
+
+.btn-infantil:hover {
+    background: #991b1b;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(153, 27, 27, 0.6);
+    transform: translateY(-2px);
+}
+
+/* Animação de lâmpada falhando */
+@keyframes flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.4; }
+}
+
+/* --- AJUSTES DE NOMENCLATURA --- */
+/* (Mantive as classes originais para o seu HTML funcionar, 
+   mas o visual agora é de suspense) */
+   /* --- 3. CARROSSEL (GALERIA DE EVIDÊNCIAS EM LINHA RETA) --- */
+.carrossel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1300px;
+    margin: 20px auto;
+}
+
+.imgg {
+    display: flex; /* Mantém as imagens em linha */
+    overflow-x: auto; /* Permite rolar para o lado */
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 30px 50px;
+    scrollbar-width: none; /* Esconde a barra no Firefox */
+}
+
+/* Esconde a barra de rolagem no Chrome/Safari */
+.imgg::-webkit-scrollbar { 
+    display: none; 
+}
+
+.imgg img {
+    flex: 0 0 240px; /* Não deixa a imagem encolher, mantendo a linha */
+    height: 320px;
+    object-fit: cover;
+    border-radius: 4px !important; /* Bordas retas e secas */
+    filter: grayscale(100%) sepia(20%) contrast(1.2); /* Tom de foto antiga/misteriosa */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7); 
+    transition: all 0.5s ease;
+    cursor: pointer;
+    scroll-snap-align: center;
+    border: 1px solid #333;
+}
+
+.imgg img:hover { 
+    filter: grayscale(0%) contrast(1.1); /* Revela a cor ao investigar (hover) */
+    transform: scale(1.05) translateY(-5px);
+    border: 1px solid #991b1b; /* Realce em vermelho sangue */
+    box-shadow: 0 0 20px rgba(153, 27, 27, 0.5);
+}
+
+/* --- SETAS DE NAVEGAÇÃO (ESTILO MINIMALISTA) --- */
+.seta-decorativa {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: #991b1b; /* Vermelho escuro */
+    z-index: 10;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.seta-esq { left: 15px; }
+.seta-dir { right: 15px; }
+
+.carrossel-wrapper:hover .seta-decorativa {
+    opacity: 1;
+}
+/* Container da Seção */
+.secao-conversao {
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, #0a0a0c, #050505);
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+    position: relative;
+}
+
+/* Título com ar de "documento antigo" */
+.secao-conversao h1 {
+    font-family: 'Playfair Display', serif;
+    color: #b1b1b1; 
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.secao-conversao p {
+    color: #666;
+    font-style: italic;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+/* O Botão de Entrada para o Sebo */
+.btn-marketing-direto {
+    display: inline-block;
+    padding: 18px 40px;
+    background-color: #000;
+    color: #991b1b !important; /* Texto em vermelho alerta */
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border: 2px solid #991b1b;
+    border-radius: 0; /* Totalmente quadrado para passar seriedade */
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Efeito de inversão no hover */
+.btn-marketing-direto:hover {
+    background-color: #991b1b;
+    color: #ffffff !important;
+    box-shadow: 0 0 30px rgba(153, 27, 27, 0.4);
+    transform: scale(1.02);
+}
+
+/* Seta com movimento sutil */
+.seta-btn {
+    display: inline-block;
+    transition: transform 0.4s;
+}
+
+.btn-marketing-direto:hover .seta-btn {
+    transform: translateX(10px);
+}
+
+/* Decoração de fundo (opcional): uma linha que lembra um batimento ou assinatura */
+.secao-conversao::after {
+    content: "";
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    width: 150px;
+    height: 1px;
+    background: #991b1b;
+    transform: translateX(-50%);
+    opacity: 0.3;
+}
